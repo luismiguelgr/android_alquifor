@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/descripcionAddPublicacion"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NuevaPublicacionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="90dp">
+
+        <EditText
+            android:id="@+id/tituloAnadirNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Título"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/descripcionAnadirNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Descripción"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/botonCrearNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/botonCrearNuevaPublicacion" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

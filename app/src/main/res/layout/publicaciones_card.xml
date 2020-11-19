@@ -4,34 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="150dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/publicaciones_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="358dp"
+        android:layout_height="107dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="214dp" >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="359dp"
+            android:layout_height="104dp">
 
 
             <TextView
                 android:id="@+id/tituloPublicacion"
                 style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="141dp"
-                android:layout_height="65dp"
+                android:layout_width="197dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="13dp"
                 android:layout_toEndOf="@+id/fotoPublicacion"
                 android:lines="2"
                 android:textAlignment="center"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,25 +43,31 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tituloPublicacion"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="25dp" />
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="18dp" />
 
             <TextView
                 android:id="@+id/textoVisitasPublicaciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tituloPublicacion"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="13dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="24dp"
                 android:layout_toStartOf="@+id/visitasPublicacion"
                 android:text="@string/stringVisitas"
                 tools:text="@string/stringVisitas" />
 
             <ImageView
                 android:id="@+id/fotoPublicacion"
-                android:layout_width="216dp"
-                android:layout_height="123dp"
-                app:srcCompat="@drawable/casa" />
+                android:layout_width="116dp"
+                android:layout_height="103dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="0dp"
+                app:srcCompat="@drawable/foto_publicacion_1" />
 
 
         </RelativeLayout>

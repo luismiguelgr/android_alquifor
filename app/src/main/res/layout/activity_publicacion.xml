@@ -6,31 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".PublicacionActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Titulo de la publicacion: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Titulo de la publicacion: " />
 
     <TextView
-        android:id="@+id/idPublicacionSeleccionada"
-        android:layout_width="127dp"
-        android:layout_height="82dp"
+        android:id="@+id/tituloPublicacionSeleccionada"
+        android:layout_width="251dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imagenPublicacionSeleccionada"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <ImageView
+        android:id="@+id/imagenPublicacionSeleccionada"
+        android:layout_width="280dp"
+        android:layout_height="92dp"
+        android:layout_marginBottom="48dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/descripcionPublicacionSeleccionada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/foto_publicacion_2" />
 
     <TextView
         android:id="@+id/descripcionPublicacionSeleccionada"
-        android:layout_width="185dp"
-        android:layout_height="237dp"
-        android:layout_marginTop="304dp"
+        android:layout_width="244dp"
+        android:layout_height="102dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="monospace"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/recicladorComentarios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recicladorComentarios"
+        android:layout_width="357dp"
+        android:layout_height="229dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idPublicacionSeleccionada"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

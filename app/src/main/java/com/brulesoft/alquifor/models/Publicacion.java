@@ -50,6 +50,10 @@ public class Publicacion {
         this.id_usuario = id_usuario;
     }
 
+    public Publicacion(){
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -80,6 +84,14 @@ public class Publicacion {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
 //    public String getPros() {

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brulesoft.alquifor.MainActivity;
@@ -33,6 +34,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
+import android.os.Bundle;
+import androidx.core.content.FileProvider;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
@@ -89,8 +102,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
             }
         });
         holder.tituloPublicacion.setText(dataList.get(position).getTitulo());
-        String imagen = dataList.get(position).getFoto();
-        Picasso.get().load(imagen).into(holder.fotoPublicacion);
+//        String imagen = dataList.get(position).getFoto();
+//        Picasso.get().load(imagen).into(holder.fotoPublicacion);
 //        String imagen = "android.resource://com.brulesoft.alquifor/drawable/"+dataList.get(position).getFoto();
 //        Uri ruta = Uri.parse(imagen);
 //        holder.fotoPublicacion.setImageDrawable(Drawable.createFromPath(imagen));
@@ -101,6 +114,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
 //        imagen = imagen.replace("@drawable/", "android.resource://com.brulesoft.alquifor/drawable/");
 //        holder.fotoPublicacion.setImageURI(uriImagen);
         holder.visitasPublicacion.setText(dataList.get(position).getVisitas().toString());
+
     }
 
 

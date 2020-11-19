@@ -14,7 +14,8 @@ public class RetrofitClient {
 //    private static final String BASE_URL = "https://10.0.2.2:8080/";
 //    private static final String BASE_URL = "https://192.168.31.128:8000/";
 //    private static final String BASE_URL = "https://10.0.2.2:80/";
-    private static final String BASE_URL = "http://192.168.31.128/";
+//    private static final String BASE_URL = "http://192.168.31.128/"; // Wifi Casa_mi
+    private static final String BASE_URL = "http://192.168.1.35/"; // Wifi Movistar
 
 
 
