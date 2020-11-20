@@ -1,5 +1,6 @@
 package com.brulesoft.alquifor.models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.format.DateTimeFormatter;
@@ -38,13 +39,13 @@ public class Publicacion {
 
 
     public Publicacion(Integer id, String titulo, String foto, String descripcion, String pros, String contras, Integer visitas, String created_at, String updated_at, Integer id_usuario) {
-        this.id = id;
+//        this.id = id;
         this.titulo = titulo;
-        this.foto = foto;
+//        this.foto = foto;
         this.descripcion = descripcion;
 //        this.pros = pros;
 //        this.contras = contras;
-        this.visitas = visitas;
+//        this.visitas = visitas;
 //        this.created_at = created_at;
 //        this.updated_at = updated_at;
         this.id_usuario = id_usuario;

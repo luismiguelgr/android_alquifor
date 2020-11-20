@@ -1,19 +1,15 @@
 package com.brulesoft.alquifor;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brulesoft.alquifor.api.GetPublicaciones;
-import com.brulesoft.alquifor.api.MyAdapter;
+import com.brulesoft.alquifor.api.MethodPublicaciones;
 import com.brulesoft.alquifor.api.MyAdapterComentario;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Comentario;
@@ -41,7 +37,7 @@ public class PublicacionActivity extends AppCompatActivity {
         descripcionPublicacionSeleccionada = (TextView) findViewById(R.id.descripcionPublicacionSeleccionada);
         Integer id = getIntent().getIntExtra("id", 0);
 
-        GetPublicaciones service = RetrofitClient.getRetrofitInstance().create(GetPublicaciones.class);
+        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
         Call<Publicacion> call = service.getPublicacion(id);
 
         call.enqueue(new Callback<Publicacion>() {
@@ -78,6 +74,7 @@ public class PublicacionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Comentario>> call, Throwable t) {
+                Log.e("ERRRORRRR", ""+t.getMessage());
                 Toast.makeText(PublicacionActivity.this, "MAL", Toast.LENGTH_SHORT).show();
             }
 

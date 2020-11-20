@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brulesoft.alquifor.api.AddPublicacion;
-import com.brulesoft.alquifor.api.GetPublicaciones;
+import com.brulesoft.alquifor.api.MethodPublicaciones;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Publicacion;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -35,24 +38,28 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
         tituloAnadirNuevaPublicacion = (EditText) findViewById(R.id.tituloAnadirNuevaPublicacion);
         descripcionAnadirNuevaPublicacion = (EditText) findViewById(R.id.descripcionAnadirNuevaPublicacion);
 
-        Publicacion nuevaPublicacion = new Publicacion();
-        nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString());
-        nuevaPublicacion.setTitulo(descripcionAnadirNuevaPublicacion.getText().toString());
-        nuevaPublicacion.setId_usuario(1);
-
-
-
-
         botonCrearNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddPublicacion service = RetrofitClient.getRetrofitInstance().create(AddPublicacion.class);
+                Publicacion nuevaPublicacion = new Publicacion();
+                nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
+                nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
+                nuevaPublicacion.setId_usuario(1);
+                MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
                 Call<Publicacion> call = service.addPublicacion(nuevaPublicacion);
                 call.enqueue(new Callback<Publicacion>() {
 
                     @Override
                     public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
-                        Toast.makeText(NuevaPublicacionActivity.this, "BIEN", Toast.LENGTH_SHORT).show();
+                        Log.e("ERRRORR", ""+response.raw());
+                        Log.e("ERRRORR", ""+response.body());
+                        Log.e("ERRRORR", ""+response.errorBody());
+                        if(response.isSuccessful()){
+                            Toast.makeText(NuevaPublicacionActivity.this, "Publicación creada con éxito", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Log.e("ERRRORR", ""+response.errorBody());
+                        }
+//                        Toast.makeText(NuevaPublicacionActivity.this, "BIEN", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         startActivity(intent);
                     }
@@ -73,4 +80,6 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
         super.onBackPressed();
         this.finish();
     }
+
+
 }

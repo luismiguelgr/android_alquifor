@@ -2,52 +2,19 @@ package com.brulesoft.alquifor.api;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brulesoft.alquifor.MainActivity;
 import com.brulesoft.alquifor.PublicacionActivity;
 import com.brulesoft.alquifor.R;
 import com.brulesoft.alquifor.models.Publicacion;
-import com.brulesoft.alquifor.models.Usuario;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Bundle;
-import androidx.core.content.FileProvider;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> {
 
@@ -73,9 +40,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
             super(itemView);
             myView = itemView;
 
-            tituloPublicacion = myView.findViewById(R.id.tituloPublicacion);
+            tituloPublicacion = myView.findViewById(R.id.usuarioComentario);
             fotoPublicacion = myView.findViewById(R.id.fotoPublicacion);
-            visitasPublicacion = myView.findViewById(R.id.visitasPublicacion);
+            visitasPublicacion = myView.findViewById(R.id.fechaComentario);
 
         }
     }

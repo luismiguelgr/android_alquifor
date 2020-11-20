@@ -6,15 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brulesoft.alquifor.api.GetPublicaciones;
+import com.brulesoft.alquifor.api.MethodPublicaciones;
 import com.brulesoft.alquifor.api.MyAdapter;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Publicacion;
@@ -46,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         botonAddPublicacion = (FloatingActionButton) findViewById(R.id.botonAddPublicacion);
 
-        GetPublicaciones service = RetrofitClient.getRetrofitInstance().create(GetPublicaciones.class);
+        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
         Call<List<Publicacion>> call = service.getAllPublicaciones();
         call.enqueue(new Callback<List<Publicacion>>() {
 

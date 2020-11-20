@@ -2,6 +2,8 @@ package com.brulesoft.alquifor.api;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.brulesoft.alquifor.R;
 import com.brulesoft.alquifor.models.Comentario;
 import com.brulesoft.alquifor.models.Publicacion;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class MyAdapterComentario extends RecyclerView.Adapter<MyAdapterComentario.CustomViewHolder> {
@@ -32,13 +35,17 @@ public class MyAdapterComentario extends RecyclerView.Adapter<MyAdapterComentari
 
         public final View myView;
 
-        TextView textoComentario;
+        TextView textoComentarioCard1, fechaComentarioCard;
 
         CustomViewHolder(View itemView) {
             super(itemView);
             myView = itemView;
 
-            textoComentario = myView.findViewById(R.id.textoComentario);
+            textoComentarioCard1 = myView.findViewById(R.id.textoComentarioCard1);
+            textoComentarioCard1.setMovementMethod(new ScrollingMovementMethod());
+            fechaComentarioCard = myView.findViewById(R.id.fechaComentarioCard);
+            fechaComentarioCard.setMovementMethod(new ScrollingMovementMethod());
+
 
         }
     }
@@ -49,22 +56,25 @@ public class MyAdapterComentario extends RecyclerView.Adapter<MyAdapterComentari
 
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.comentario_layout, parent, false);
+        View view = layoutInflater.inflate(R.layout.comentario_card, parent, false);
         return new CustomViewHolder(view);
     }
 
     @Override
 
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PublicacionActivity.class);
-                intent.putExtra("id", dataList.get(position).getId());
-                context.startActivity(intent);
-            }
-        });
-        holder.textoComentario.setText(dataList.get(position).getTexto());
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(v.getContext(), PublicacionActivity.class);
+//                intent.putExtra("id", dataList.get(position).getId());
+//                context.startActivity(intent);
+//            }
+//        });
+        holder.textoComentarioCard1.setText(dataList.get(position).getTexto());
+        holder.fechaComentarioCard.setText(dataList.get(position).getFechaCreacion());
+
+
     }
 
 

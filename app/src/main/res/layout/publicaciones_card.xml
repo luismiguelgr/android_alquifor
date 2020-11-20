@@ -22,7 +22,7 @@
 
 
             <TextView
-                android:id="@+id/tituloPublicacion"
+                android:id="@+id/usuarioComentario"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="197dp"
                 android:layout_height="wrap_content"
@@ -38,22 +38,22 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/visitasPublicacion"
+                android:id="@+id/fechaComentario"
                 android:layout_width="34dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tituloPublicacion"
+                android:layout_below="@+id/usuarioComentario"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="18dp" />
 
             <TextView
-                android:id="@+id/textoVisitasPublicaciones"
+                android:id="@+id/textoComentarioCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tituloPublicacion"
+                android:layout_below="@+id/usuarioComentario"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="24dp"
-                android:layout_toStartOf="@+id/visitasPublicacion"
+                android:layout_toStartOf="@+id/fechaComentario"
                 android:text="@string/stringVisitas"
                 tools:text="@string/stringVisitas" />
 
