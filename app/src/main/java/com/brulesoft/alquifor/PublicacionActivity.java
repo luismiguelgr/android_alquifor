@@ -4,8 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +22,11 @@ import com.brulesoft.alquifor.api.MyAdapterComentario;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Comentario;
 import com.brulesoft.alquifor.models.Publicacion;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,16 +37,24 @@ public class PublicacionActivity extends AppCompatActivity {
 
     TextView tituloPublicacionSeleccionada;
     TextView descripcionPublicacionSeleccionada;
+    ListView prosPublicacion, contrasPublicacion;
+    ImageView imagenPublicacionSeleccionada;
     private RecyclerView myRecyclerView;
     private MyAdapterComentario myAdapter;
     private RecyclerView.LayoutManager lManager;
+    TextView estiloTextoPros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
         tituloPublicacionSeleccionada = (TextView) findViewById(R.id.tituloPublicacionSeleccionada);
+        tituloPublicacionSeleccionada.setMovementMethod(new ScrollingMovementMethod());
         descripcionPublicacionSeleccionada = (TextView) findViewById(R.id.descripcionPublicacionSeleccionada);
+        descripcionPublicacionSeleccionada.setMovementMethod(new ScrollingMovementMethod());
+        prosPublicacion = (ListView) findViewById(R.id.prosPublicacion);
+        contrasPublicacion = (ListView) findViewById(R.id.contrasPublicacion);
+        imagenPublicacionSeleccionada = (ImageView) findViewById(R.id.imagenPublicacionSeleccionada);
         Integer id = getIntent().getIntExtra("id", 0);
 
         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
@@ -44,10 +64,14 @@ public class PublicacionActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
-//                Toast.makeText(PublicacionActivity.this, "BIEN", Toast.LENGTH_SHORT).show();
-//               loadDataList(response.body());
+                tituloPublicacionSeleccionada.setText(response.body().getTitulo());
                 descripcionPublicacionSeleccionada.setText(response.body().getDescripcion());
-                tituloPublicacionSeleccionada.setText(response.body().getDescripcion());
+                ArrayAdapter<String> adaptadorPros = new ArrayAdapter<String>(PublicacionActivity.this, R.layout.texto_pros_publicacion, response.body().getPros());
+                prosPublicacion.setAdapter(adaptadorPros);
+                ArrayAdapter<String> adaptadorContras = new ArrayAdapter<String>(PublicacionActivity.this, R.layout.texto_contras_publicacion, response.body().getContras());
+                contrasPublicacion.setAdapter(adaptadorContras);
+//                Picasso.get().load("http://10.0.2.2:80/uploads/otra_casa.jpg").into(imagenPublicacionSeleccionada);
+                Picasso.get().load(response.body().getFoto()).error(PublicacionActivity.this.getResources().getDrawable(R.drawable.sin_imagen)).into(imagenPublicacionSeleccionada);
 
             }
 

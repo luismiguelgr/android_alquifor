@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brulesoft.alquifor.PublicacionActivity;
 import com.brulesoft.alquifor.R;
 import com.brulesoft.alquifor.models.Publicacion;
+import com.brulesoft.alquifor.utiles.CircleTransform;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -69,17 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
             }
         });
         holder.tituloPublicacion.setText(dataList.get(position).getTitulo());
-//        String imagen = dataList.get(position).getFoto();
-//        Picasso.get().load(imagen).into(holder.fotoPublicacion);
-//        String imagen = "android.resource://com.brulesoft.alquifor/drawable/"+dataList.get(position).getFoto();
-//        Uri ruta = Uri.parse(imagen);
-//        holder.fotoPublicacion.setImageDrawable(Drawable.createFromPath(imagen));
-
-
-//        Picasso.get().load(imagen).into(holder.fotoPublicacion);
-
-//        imagen = imagen.replace("@drawable/", "android.resource://com.brulesoft.alquifor/drawable/");
-//        holder.fotoPublicacion.setImageURI(uriImagen);
+        Picasso.get().load(dataList.get(position).getFoto()).transform(new CircleTransform()).error(context.getResources().getDrawable(R.drawable.sin_imagen)).into(holder.fotoPublicacion);
         holder.visitasPublicacion.setText(dataList.get(position).getVisitas().toString());
 
     }

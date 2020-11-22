@@ -8,32 +8,56 @@
     tools:context=".NuevaPublicacionActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="393dp"
+        android:layout_height="419dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="90dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-4dp">
 
         <EditText
             android:id="@+id/tituloAnadirNuevaPublicacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="87dp"
             android:ems="10"
             android:hint="Título"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
 
         <EditText
             android:id="@+id/descripcionAnadirNuevaPublicacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="122dp"
             android:ems="10"
             android:hint="Descripción"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/listaProsNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/anadirProListaNuevaPulicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/botonAnadirProNuevaPublicacion" />
+
+        <TextView
+            android:id="@+id/listaContraNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/anadirContraListaNuevaPulicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/botonAnadirContraNuevaPublicacion" />
 
         <Button
             android:id="@+id/botonCrearNuevaPublicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/botonCrearNuevaPublicacion" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

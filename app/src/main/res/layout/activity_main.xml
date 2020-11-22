@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclador"
-        android:layout_width="355dp"
-        android:layout_height="512dp"
+        android:layout_width="352dp"
+        android:layout_height="548dp"
         android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"

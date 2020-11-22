@@ -9,51 +9,100 @@
 
     <TextView
         android:id="@+id/tituloPublicacionSeleccionada"
-        android:layout_width="251dp"
+        android:layout_width="326dp"
         android:layout_height="53dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="15dp"
+        android:scrollbars="vertical"
         android:textAlignment="center"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imagenPublicacionSeleccionada"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imagenPublicacionSeleccionada"
         android:layout_width="280dp"
         android:layout_height="92dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/descripcionPublicacionSeleccionada"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/foto_publicacion_2" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloPublicacionSeleccionada"
+
+        />
 
     <TextView
         android:id="@+id/descripcionPublicacionSeleccionada"
-        android:layout_width="244dp"
-        android:layout_height="102dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="326dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="monospace"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/recicladorComentarios"
+        android:scrollbars="vertical"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPublicacionSeleccionada" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicladorComentarios"
-        android:layout_width="357dp"
-        android:layout_height="229dp"
-        android:layout_marginBottom="132dp"
+        android:layout_width="347dp"
+        android:layout_height="137dp"
+        android:layout_marginBottom="40dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contrasPublicacion"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ListView
+        android:id="@+id/prosPublicacion"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoFijoProsPublicacion" />
+
+    <ListView
+        android:id="@+id/contrasPublicacion"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toEndOf="@+id/prosPublicacion"
+        app:layout_constraintTop_toBottomOf="@+id/textoFijoContrasPublicacion" />
+
+    <TextView
+        android:id="@+id/textoFijoProsPublicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="30dp"
+        android:text="PROS"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionPublicacionSeleccionada"
+        tools:text="PROS" />
+
+    <TextView
+        android:id="@+id/textoFijoContrasPublicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="68dp"
+        android:text="CONTRAS"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toEndOf="@+id/textoFijoProsPublicacion"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionPublicacionSeleccionada"
+        tools:text="CONTRAS" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

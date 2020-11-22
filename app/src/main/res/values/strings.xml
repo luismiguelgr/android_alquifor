@@ -2,5 +2,7 @@
     <string name="app_name">Alquifor</string>
     <string name="stringVisitas">Visitas:</string>
     <string name="botonCrearNuevaPublicacion">Crear publicación</string>
+    <string name="botonAnadirContraNuevaPublicacion">Añadir</string>
+    <string name="botonAnadirProNuevaPublicacion">Añadir</string>
 
 </resources>
