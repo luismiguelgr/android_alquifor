@@ -27,8 +27,10 @@ public class RetrofitClient {
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
+                    .setLenient()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     .create();
+
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))

@@ -159,6 +159,7 @@ public class Publicacion {
                 ", foto='" + foto + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", pros=" + pros +
+                ", contras=" + contras +
                 ", visitas=" + visitas +
                 ", created_at='" + created_at + '\'' +
                 ", updated_at='" + updated_at + '\'' +

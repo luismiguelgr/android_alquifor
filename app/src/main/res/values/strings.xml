@@ -4,5 +4,6 @@
     <string name="botonCrearNuevaPublicacion">Crear publicación</string>
     <string name="botonAnadirContraNuevaPublicacion">Añadir</string>
     <string name="botonAnadirProNuevaPublicacion">Añadir</string>
+    <string name="botonAnadirFotoNuevaPublicacion">Añadir imagen</string>
 
 </resources>

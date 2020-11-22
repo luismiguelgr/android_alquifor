@@ -7,12 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".NuevaPublicacionActivity">
 
+    <ImageView
+        android:id="@+id/muestraImagenAnadirNuevaPublicacion"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:srcCompat="@drawable/sin_imagen" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="393dp"
         android:layout_height="419dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-4dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/tituloAnadirNuevaPublicacion"
@@ -53,9 +65,15 @@
             android:text="@string/botonAnadirContraNuevaPublicacion" />
 
         <Button
-            android:id="@+id/botonCrearNuevaPublicacion"
+            android:id="@+id/botonAnadirFotoNuevaPublicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/botonAnadirFotoNuevaPublicacion" />
+
+        <Button
+            android:id="@+id/botonCrearNuevaPublicacion"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:text="@string/botonCrearNuevaPublicacion" />
 
     </LinearLayout>
