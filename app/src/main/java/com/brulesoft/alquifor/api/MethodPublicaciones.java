@@ -43,6 +43,6 @@ public interface MethodPublicaciones {
                                      @Part("descripcion") RequestBody descripcion,
                                      @Part("id_usuario") RequestBody id_usuario,
                                      @Part("foto") RequestBody foto,
-                                     @Field("pros") RequestBody pros,
-                                     @Field("contras") RequestBody contras);
+                                     @Part("pros") RequestBody pros,
+                                     @Part("contras") RequestBody contras);
 }

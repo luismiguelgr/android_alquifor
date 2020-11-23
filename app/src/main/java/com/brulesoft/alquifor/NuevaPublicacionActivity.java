@@ -62,7 +62,7 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
     final int FOTO_CONST = 1;
     String nombreImagen = "";
     File foto = null;
-    ArrayList<String> listaPros, listaContras;
+//    ArrayList<String> listaPros, listaContras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +90,8 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                 builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        nuevaPublicacion.addPro(input.getText().toString().trim());
-                        listaPros.add(input.getText().toString().trim());
+                        nuevaPublicacion.addPro(input.getText().toString().trim());
+//                        listaPros.add(input.getText().toString().trim());
                         listaProsNuevaPublicacion.setText(input.getText().toString().trim());
                     }
                 });
@@ -109,8 +109,8 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                 builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        nuevaPublicacion.addContra(input.getText().toString().trim());
-                        listaContras.add(input.getText().toString().trim());
+                        nuevaPublicacion.addContra(input.getText().toString().trim());
+//                        listaContras.add(input.getText().toString().trim());
                         listaContraNuevaPublicacion.setText(input.getText().toString().trim());
                     }
                 });
@@ -135,14 +135,14 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Call<Publicacion> call = null;
-                    if(nombreImagen != null && nombreImagen.isEmpty()){
-                                        nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
-                                        nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
-                                        nuevaPublicacion.setId_usuario(1);
-                                        nuevaPublicacion.setFoto("");
-                        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
-                        call = service.addPublicacion(nuevaPublicacion);
-                    }else {
+//                    if(nombreImagen != null && nombreImagen.isEmpty()){
+//                                        nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
+//                                        nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
+//                                        nuevaPublicacion.setId_usuario(1);
+//                                        nuevaPublicacion.setFoto("");
+//                        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
+//                        call = service.addPublicacion(nuevaPublicacion);
+//                    }else {
 
                         RequestBody titulo = RequestBody.create(MultipartBody.FORM, tituloAnadirNuevaPublicacion.getText().toString().trim());
                         RequestBody descripcion = RequestBody.create(MultipartBody.FORM, descripcionAnadirNuevaPublicacion.getText().toString().trim());
@@ -156,7 +156,7 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
                         MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imagen", nombreImagen, imageBody);
                         call = service.addPublicacionConImagen(imagePart, titulo, descripcion, idUsuario, nombreFoto, pros, contras);
-                    }
+//                    }
 
                     call.enqueue(new Callback<Publicacion>() {
 
