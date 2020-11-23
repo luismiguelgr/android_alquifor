@@ -45,12 +45,8 @@ public class MyAdapterComentario extends RecyclerView.Adapter<MyAdapterComentari
             textoComentarioCard1.setMovementMethod(new ScrollingMovementMethod());
             fechaComentarioCard = myView.findViewById(R.id.fechaComentarioCard);
             fechaComentarioCard.setMovementMethod(new ScrollingMovementMethod());
-
-
         }
     }
-
-
 
     @Override
 
@@ -63,18 +59,8 @@ public class MyAdapterComentario extends RecyclerView.Adapter<MyAdapterComentari
     @Override
 
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), PublicacionActivity.class);
-//                intent.putExtra("id", dataList.get(position).getId());
-//                context.startActivity(intent);
-//            }
-//        });
         holder.textoComentarioCard1.setText(dataList.get(position).getTexto());
         holder.fechaComentarioCard.setText(dataList.get(position).getFechaCreacion());
-
-
     }
 
 

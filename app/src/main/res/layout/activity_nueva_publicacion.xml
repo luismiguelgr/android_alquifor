@@ -9,18 +9,20 @@
 
     <ImageView
         android:id="@+id/muestraImagenAnadirNuevaPublicacion"
-        android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_width="347dp"
+        android:layout_height="108dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/botonCrearNuevaPublicacion"
+        app:layout_constraintVertical_bias="0.329"
         app:srcCompat="@drawable/sin_imagen" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="393dp"
-        android:layout_height="419dp"
+        android:layout_width="349dp"
+        android:layout_height="454dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +47,7 @@
         <TextView
             android:id="@+id/listaProsNuevaPublicacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="57dp" />
 
         <Button
             android:id="@+id/anadirProListaNuevaPulicacion"
@@ -56,7 +58,7 @@
         <TextView
             android:id="@+id/listaContraNuevaPublicacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="46dp" />
 
         <Button
             android:id="@+id/anadirContraListaNuevaPulicacion"
@@ -70,12 +72,19 @@
             android:layout_height="wrap_content"
             android:text="@string/botonAnadirFotoNuevaPublicacion" />
 
-        <Button
-            android:id="@+id/botonCrearNuevaPublicacion"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="@string/botonCrearNuevaPublicacion" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/botonCrearNuevaPublicacion"
+        style="@android:style/Widget.Material.Light.Button.Toggle"
+        android:layout_width="205dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#0DA3E6"
+        android:text="@string/botonCrearNuevaPublicacion"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

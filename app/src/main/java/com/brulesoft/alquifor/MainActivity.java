@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<Publicacion>> call, Response<List<Publicacion>> response) {
-                Toast.makeText(MainActivity.this, "BIEN", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Bienvenid@", Toast.LENGTH_SHORT).show();
                 loadDataList(response.body());
             }
 
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
         myRecyclerView = (RecyclerView) findViewById(R.id.reciclador);
         myRecyclerView.setHasFixedSize(true);
 
-// Usar un administrador para LinearLayout
+        // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(MainActivity.this);
         myRecyclerView.setLayoutManager(lManager);
 
-// Crear un nuevo adaptador
+        // Crear un nuevo adaptador
         myAdapter = new MyAdapter(usersList, MainActivity.this);
         myRecyclerView.setAdapter(myAdapter);
 

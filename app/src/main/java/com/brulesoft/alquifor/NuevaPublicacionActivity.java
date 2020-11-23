@@ -35,7 +35,14 @@ import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -53,8 +60,9 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
     ImageView muestraImagenAnadirNuevaPublicacion;
     String rutaAbsoluta = "";
     final int FOTO_CONST = 1;
-    String nombreImagen ;
+    String nombreImagen = "";
     File foto = null;
+    ArrayList<String> listaPros, listaContras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +90,8 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                 builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        nuevaPublicacion.addPro(input.getText().toString().trim());
+//                        nuevaPublicacion.addPro(input.getText().toString().trim());
+                        listaPros.add(input.getText().toString().trim());
                         listaProsNuevaPublicacion.setText(input.getText().toString().trim());
                     }
                 });
@@ -100,7 +109,8 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                 builder.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        nuevaPublicacion.addContra(input.getText().toString().trim());
+//                        nuevaPublicacion.addContra(input.getText().toString().trim());
+                        listaContras.add(input.getText().toString().trim());
                         listaContraNuevaPublicacion.setText(input.getText().toString().trim());
                     }
                 });
@@ -111,59 +121,64 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
         botonAnadirFotoNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sacarFoto(nuevaPublicacion.getId());
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String fechaActual = dateFormat.format(date);
+                String uniqueID = UUID.randomUUID().toString();
+                String nombreExtensionFinal = fechaActual+"_"+uniqueID;
+                sacarFoto(nombreExtensionFinal);
             }
         });
 
 
-        botonCrearNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            botonCrearNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Call<Publicacion> call = null;
+                    if(nombreImagen != null && nombreImagen.isEmpty()){
+                                        nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
+                                        nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
+                                        nuevaPublicacion.setId_usuario(1);
+                                        nuevaPublicacion.setFoto("");
+                        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
+                        call = service.addPublicacion(nuevaPublicacion);
+                    }else {
 
-                nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
-                nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
-                nuevaPublicacion.setId_usuario(1);
-                nuevaPublicacion.setFoto(nombreImagen);
-                RequestBody titulo = RequestBody.create(MultipartBody.FORM, tituloAnadirNuevaPublicacion.getText().toString().trim());
-                RequestBody descripcion = RequestBody.create(MultipartBody.FORM, descripcionAnadirNuevaPublicacion.getText().toString().trim());
-                RequestBody nombreFoto = RequestBody.create(MultipartBody.FORM, nombreImagen);
-                RequestBody pros = RequestBody.create(MultipartBody.FORM, "");
-                RequestBody contras = RequestBody.create(MultipartBody.FORM, "");
-                RequestBody idUsuario = RequestBody.create(MultipartBody.FORM, "1");
-                RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), foto);
+                        RequestBody titulo = RequestBody.create(MultipartBody.FORM, tituloAnadirNuevaPublicacion.getText().toString().trim());
+                        RequestBody descripcion = RequestBody.create(MultipartBody.FORM, descripcionAnadirNuevaPublicacion.getText().toString().trim());
+                        RequestBody nombreFoto = RequestBody.create(MultipartBody.FORM, nombreImagen);
+                        RequestBody pros = RequestBody.create(MultipartBody.FORM, nuevaPublicacion.getPros().toString());
+                        RequestBody contras = RequestBody.create(MultipartBody.FORM, nuevaPublicacion.getContras().toString());
+                        RequestBody idUsuario = RequestBody.create(MultipartBody.FORM, "1");
+                        RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), foto);
 
 
-                MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
-                MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imagen", nuevaPublicacion.getFoto(), imageBody);
-                Call<Publicacion> call = service.addPublicacion(imagePart, titulo, descripcion, idUsuario, nombreFoto, pros, contras);
-                call.enqueue(new Callback<Publicacion>() {
+                        MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
+                        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imagen", nombreImagen, imageBody);
+                        call = service.addPublicacionConImagen(imagePart, titulo, descripcion, idUsuario, nombreFoto, pros, contras);
+                    }
 
-                    @Override
-                    public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
-                        if(response.isSuccessful()){
-//                          Toast.makeText(NuevaPublicacionActivity.this, "Publicación creada con éxito", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Log.e("ERRRORR4", ""+response.body());
+                    call.enqueue(new Callback<Publicacion>() {
+
+                        @Override
+                        public void onResponse(Call<Publicacion> call, Response<Publicacion> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(NuevaPublicacionActivity.this, "Publicación creada con éxito", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(NuevaPublicacionActivity.this, "La publicación no se ha podido crear", Toast.LENGTH_SHORT).show();
+                            }
+                            Intent intent = new Intent(v.getContext(), MainActivity.class);
+                            startActivity(intent);
                         }
-                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onFailure(Call<Publicacion> call, Throwable t) {
-                        Log.e("ERRRORR_ENTIDAD", ""+call.request().body());
-                        Log.e("ERRRORR_ENTIDAD", ""+call.request().method());
-                        Log.e("ERRRORR_ENTIDAD", ""+nuevaPublicacion.toString());
-                        Log.e("ERRRORR1", ""+t.getMessage());
-                        Log.e("ERRRORR2", ""+t.getCause());
-                        Log.e("ERRRORR3", ""+t.getLocalizedMessage());
-                        Toast.makeText(NuevaPublicacionActivity.this, "MAL", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onFailure(Call<Publicacion> call, Throwable t) {
+                            Toast.makeText(NuevaPublicacionActivity.this, "La publicación no se ha podido crear", Toast.LENGTH_SHORT).show();
+                        }
 
-                });
-            }
-        });
-
+                    });
+                }
+            });
     }
 
     @Override
@@ -172,13 +187,13 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private void sacarFoto(Integer idPublicacion){
+    private void sacarFoto(String nombreExtension){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager()) != null){
 
 
             try {
-                nombreImagen = "Foto_publicacion_"+idPublicacion;
+                nombreImagen = "Foto_publicacion_"+nombreExtension;
                 foto = crearArchivoFoto(nombreImagen);
             }catch (Exception e){
                 e.printStackTrace();

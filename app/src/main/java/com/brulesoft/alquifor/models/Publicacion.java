@@ -167,12 +167,4 @@ public class Publicacion {
                 '}';
     }
 
-    //
-//    public Integer getId_usuario() {
-//        return id_usuario;
-//    }
-//
-//    public void setId_usuario(Integer id_usuario) {
-//        this.id_usuario = id_usuario;
-//    }
 }

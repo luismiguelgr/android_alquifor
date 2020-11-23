@@ -1,21 +1,11 @@
 package com.brulesoft.alquifor;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,12 +17,8 @@ import com.brulesoft.alquifor.api.MyAdapterComentario;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Comentario;
 import com.brulesoft.alquifor.models.Publicacion;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -93,18 +79,15 @@ public class PublicacionActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<Comentario>> call, Response<List<Comentario>> response) {
-//                Toast.makeText(PublicacionActivity.this, "BIEN", Toast.LENGTH_SHORT).show();
                     if (response.isSuccessful()) {
                         loadDataList(response.body());
                     } else {
-                        Log.d("error message", "No existen comentarios");
                         Toast.makeText(PublicacionActivity.this, "No existen comentarios en esta publicación", Toast.LENGTH_SHORT).show();
                     }
             }
 
             @Override
             public void onFailure(Call<List<Comentario>> call, Throwable t) {
-                Log.e("ERRRORRRR", ""+t.getMessage());
                 Toast.makeText(PublicacionActivity.this, "MAL", Toast.LENGTH_SHORT).show();
             }
 
@@ -135,9 +118,5 @@ public class PublicacionActivity extends AppCompatActivity {
         myRecyclerView.setAdapter(myAdapter);
 
     }
-
-
-
-
 
 }

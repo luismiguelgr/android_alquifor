@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface GetUsers {
+public interface MethodUsuarios {
 
         @GET("/api/usuarios")
         Call<List<Usuario>> getAllUsers();

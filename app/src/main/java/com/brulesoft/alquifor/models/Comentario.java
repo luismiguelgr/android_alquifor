@@ -40,7 +40,6 @@ public class Comentario {
         this.texto = texto;
     }
 
-
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
