@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alquifor</string>
+    <string name="tituloActividadMisPublicaciones">Mis publicaciones</string>
+    <string name="botonEliminarMiPublicacion">Eliminar</string>
+</resources>

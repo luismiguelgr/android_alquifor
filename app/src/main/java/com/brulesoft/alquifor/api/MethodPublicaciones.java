@@ -13,6 +13,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -27,6 +28,9 @@ public interface MethodPublicaciones {
     @GET("/api/publicaciones")
     Call<List<Publicacion>> getAllPublicaciones();
 
+    @POST("/api/publicaciones/{id}")
+    Call<List<Publicacion>> getAllPublicacionesUsuario(@Path("id") int id);
+
     @GET("/api/publicacion/{id}")
     Call<Publicacion> getPublicacion(@Path("id") int id);
 
@@ -35,6 +39,9 @@ public interface MethodPublicaciones {
 
     @POST("/api/anadir-publicacion")
     Call<Publicacion> addPublicacion(@Body Publicacion publicacion);
+
+    @DELETE("/api/publicacion/{id}")
+    Call<Publicacion> deletePublicacion(@Path("id") int id);
 
     @Multipart
     @POST("/api/anadir-publicacion")

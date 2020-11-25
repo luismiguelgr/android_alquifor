@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.brulesoft.alquifor.api.MethodPublicaciones;
 import com.brulesoft.alquifor.api.MyAdapter;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Publicacion;
+import com.brulesoft.alquifor.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter myAdapter;
     private RecyclerView.LayoutManager lManager;
     FloatingActionButton botonAddPublicacion;
+    Button botonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         botonAddPublicacion = (FloatingActionButton) findViewById(R.id.botonAddPublicacion);
+        botonLogin = (Button) findViewById(R.id.botonLogin);
 
         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
         Call<List<Publicacion>> call = service.getAllPublicaciones();
@@ -65,12 +71,46 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        botonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuopciones, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.salir) {
+            finish();
+            System.exit(0);
+        }
+        if (id == R.id.mis_comentarios) {
+            Toast.makeText(this, "Se presionó el ícono de la cámara", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.mis_publicaciones) {
+            Intent intent = new Intent(this, MisPublicacionesActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Mis publicaciones", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadDataList(List<Publicacion> usersList) {
