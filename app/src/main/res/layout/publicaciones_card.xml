@@ -38,7 +38,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/fechaComentario"
+                android:id="@+id/fechaComentarioMiComentario"
                 android:layout_width="34dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/usuarioComentario"
@@ -47,13 +47,13 @@
                 android:layout_marginEnd="18dp" />
 
             <TextView
-                android:id="@+id/textoComentarioCard"
+                android:id="@+id/textoComentarioCardMiComentario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/usuarioComentario"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="24dp"
-                android:layout_toStartOf="@+id/fechaComentario"
+                android:layout_toStartOf="@+id/fechaComentarioMiComentario"
                 android:text="@string/stringVisitas"
                 tools:text="@string/stringVisitas" />
 

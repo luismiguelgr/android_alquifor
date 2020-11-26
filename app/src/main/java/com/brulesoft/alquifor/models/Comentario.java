@@ -18,10 +18,14 @@ public class Comentario {
     @SerializedName("fecha_creacion")
     private String fechaCreacion;
 
-    public Comentario(Integer id, String texto, String fechaCreacion) {
+    @SerializedName("id_publicacion")
+    private Integer id_publicacion;
+
+    public Comentario(Integer id, String texto, String fechaCreacion, Integer id_publicacion) {
         this.id = id;
         this.texto = texto;
         this.fechaCreacion = fechaCreacion;
+        this.id_publicacion = id_publicacion;
     }
 
     public Integer getId() {
@@ -47,4 +51,13 @@ public class Comentario {
     public String getFechaCreacion() {
         return fechaCreacion;
     }
+
+    public Integer getIdPublicacion() {
+        return id_publicacion;
+    }
+
+    public void setIdPublicacion(Integer id_publicacion) {
+        this.id_publicacion = id_publicacion;
+    }
+
 }

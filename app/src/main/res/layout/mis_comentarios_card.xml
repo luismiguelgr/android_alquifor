@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mis_comentarios_card"
+        android:layout_width="381dp"
+        android:layout_height="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/botonEliminarMiComentario"
+                android:layout_width="2dp"
+                android:layout_height="65dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="191dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="29dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/fechaComentarioMiComentario"
+                android:background="@null"
+                app:srcCompat="@android:drawable/ic_delete" />
+
+            <TextView
+                android:id="@+id/textoComentarioCardMiComentario"
+                android:layout_width="331dp"
+                android:layout_height="78dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/stringVisitas" />
+
+            <TextView
+                android:id="@+id/fechaComentarioMiComentario"
+                android:layout_width="137dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/textoComentarioCardMiComentario"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginEnd="-97dp"
+                android:layout_marginBottom="22dp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

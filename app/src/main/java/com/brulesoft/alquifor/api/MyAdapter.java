@@ -44,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomViewHolder> 
 
             tituloPublicacion = myView.findViewById(R.id.usuarioComentario);
             fotoPublicacion = myView.findViewById(R.id.fotoPublicacion);
-            visitasPublicacion = myView.findViewById(R.id.fechaComentario);
+            visitasPublicacion = myView.findViewById(R.id.fechaComentarioMiComentario);
 
         }
     }

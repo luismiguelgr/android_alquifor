@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
         }
         if (id == R.id.mis_comentarios) {
-            Toast.makeText(this, "Se presionó el ícono de la cámara", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MisComentariosActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Mis comentarios", Toast.LENGTH_LONG).show();
             return true;
         }
         if (id == R.id.mis_publicaciones) {

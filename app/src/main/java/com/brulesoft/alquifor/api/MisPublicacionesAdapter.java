@@ -1,25 +1,20 @@
 package com.brulesoft.alquifor.api;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brulesoft.alquifor.MainActivity;
 import com.brulesoft.alquifor.MisPublicacionesActivity;
-import com.brulesoft.alquifor.NuevaPublicacionActivity;
 import com.brulesoft.alquifor.PublicacionActivity;
 import com.brulesoft.alquifor.R;
 import com.brulesoft.alquifor.models.Publicacion;
@@ -59,7 +54,7 @@ public class MisPublicacionesAdapter extends RecyclerView.Adapter<MisPublicacion
 
             tituloPublicacion = myView.findViewById(R.id.usuarioComentario);
             fotoPublicacion = myView.findViewById(R.id.fotoPublicacion);
-            visitasPublicacion = myView.findViewById(R.id.fechaComentario);
+            visitasPublicacion = myView.findViewById(R.id.fechaComentarioMiComentario);
             botonEliminarMiPublicacion = myView.findViewById(R.id.botonEliminarMiPublicacion);
 
         }

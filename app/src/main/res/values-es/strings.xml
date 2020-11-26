@@ -3,4 +3,5 @@
     <string name="app_name">Alquifor</string>
     <string name="tituloActividadMisPublicaciones">Mis publicaciones</string>
     <string name="botonEliminarMiPublicacion">Eliminar</string>
+    <string name="tituloActividadMisComentarios">Mis comentarios</string>
 </resources>
