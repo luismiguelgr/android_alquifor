@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/logo_alquifor"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alquifor">
-        <activity android:name=".MisComentariosActivity"></activity>
+        <activity android:name=".RegistroActivity"></activity>
+        <activity android:name=".MisComentariosActivity" />
         <activity android:name=".MisPublicacionesActivity" />
         <activity android:name=".api.MisPublicacionesAdapter" />
         <activity

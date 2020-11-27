@@ -8,7 +8,7 @@
     <string name="title_activity_login">Inicio de sesión</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Loguearse o registrarse</string>
+    <string name="action_sign_in">Loguearse</string>
     <string name="action_sign_in_short">Loguearse</string>
     <string name="welcome">Bienvenid@</string>
     <string name="invalid_username">Usuario no válido</string>
@@ -17,5 +17,9 @@
     <string name="tituloActividadMisPublicaciones">Mis publicaciones</string>
     <string name="botonEliminarMiPublicacion">Eliminar</string>
     <string name="tituloActividadMisComentarios">Mis comentarios</string>
+    <string name="opcionMenuiniciarSesion">Iniciar sesión/Registrarse</string>
+    <string name="botonVolverLogin">Volver</string>
+    <string name="botonRegistrarse">Registrarse</string>
+    <string name="crearUsuarioRegistro">Comenzar</string>
 
 </resources>

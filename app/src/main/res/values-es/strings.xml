@@ -4,4 +4,8 @@
     <string name="tituloActividadMisPublicaciones">Mis publicaciones</string>
     <string name="botonEliminarMiPublicacion">Eliminar</string>
     <string name="tituloActividadMisComentarios">Mis comentarios</string>
+    <string name="opcionMenuiniciarSesion">Iniciar sesión/Registrarse</string>
+    <string name="botonVolverLogin">Volver</string>
+    <string name="botonRegistrarse">Registrarse</string>
+    <string name="crearUsuarioRegistro">Comenzar</string>
 </resources>

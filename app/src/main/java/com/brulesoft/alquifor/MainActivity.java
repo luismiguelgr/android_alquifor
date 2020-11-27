@@ -112,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Mis publicaciones", Toast.LENGTH_LONG).show();
             return true;
         }
+        if (id == R.id.opcionMenuiniciarSesion) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -128,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
         // Crear un nuevo adaptador
         myAdapter = new MyAdapter(usersList, MainActivity.this);
         myRecyclerView.setAdapter(myAdapter);
-
-//        myRecyclerView = findViewById(R.id.myRecyclerView);
-//        myAdapter = new MyAdapter(usersList);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-//        myRecyclerView.setLayoutManager(layoutManager);
-//        myRecyclerView.setAdapter(myAdapter);
     }
 
 

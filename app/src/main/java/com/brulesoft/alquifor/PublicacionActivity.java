@@ -3,9 +3,13 @@ package com.brulesoft.alquifor;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -17,6 +21,7 @@ import com.brulesoft.alquifor.api.MyAdapterComentario;
 import com.brulesoft.alquifor.api.RetrofitClient;
 import com.brulesoft.alquifor.models.Comentario;
 import com.brulesoft.alquifor.models.Publicacion;
+import com.brulesoft.alquifor.ui.login.LoginActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -97,9 +102,51 @@ public class PublicacionActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuopciones, menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.salir) {
+            finish();
+            System.exit(0);
+        }
+        if (id == R.id.mis_comentarios) {
+            Intent intent = new Intent(this, MisComentariosActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Mis comentarios", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.mis_publicaciones) {
+            Intent intent = new Intent(this, MisPublicacionesActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Mis publicaciones", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcionMenuiniciarSesion) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadDataList(List<Comentario> usersList) {
