@@ -17,6 +17,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -25,16 +26,17 @@ import retrofit2.http.Path;
 
 public interface MethodPublicaciones {
 
-    @GET("/api/publicaciones")
+    @GET("/publicaciones")
     Call<List<Publicacion>> getAllPublicaciones();
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("/api/publicaciones/{id}")
-    Call<List<Publicacion>> getAllPublicacionesUsuario(@Path("id") int id);
+    Call<List<Publicacion>> getAllPublicacionesUsuario(@Header("Authorization") String token, @Path("id") int id);
 
-    @GET("/api/publicacion/{id}")
+    @GET("/publicacion/{id}")
     Call<Publicacion> getPublicacion(@Path("id") int id);
 
-    @GET("/api/publicacion/{id}/comentarios")
+    @GET("/publicacion/{id}/comentarios")
     Call<List<Comentario>> getComentariosPublicacion(@Path("id") int id);
 
     @POST("/api/anadir-publicacion")

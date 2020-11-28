@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                startActivity(intent);
+                // Prueba  para confirmar que tengo token
+                SharedPreferences preferences = MainActivity.this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                String retrivedToken  = preferences.getString("TOKEN",null);
+                Toast.makeText(MainActivity.this, retrivedToken, Toast.LENGTH_SHORT).show();
             }
         });
     }

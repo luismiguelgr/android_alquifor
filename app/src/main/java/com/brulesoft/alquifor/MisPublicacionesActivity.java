@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,8 +40,11 @@ public class MisPublicacionesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        SharedPreferences preferences = MisPublicacionesActivity.this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String token  = preferences.getString("TOKEN",null);
+
         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
-        Call<List<Publicacion>> call = service.getAllPublicacionesUsuario(1);
+        Call<List<Publicacion>> call = service.getAllPublicacionesUsuario("Bearer "+token,1);
         call.enqueue(new Callback<List<Publicacion>>() {
 
             @Override

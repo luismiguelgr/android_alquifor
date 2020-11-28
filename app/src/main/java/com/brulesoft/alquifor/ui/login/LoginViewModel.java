@@ -4,12 +4,29 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.util.Log;
 import android.util.Patterns;
+import android.widget.Toast;
 
+import com.brulesoft.alquifor.MainActivity;
+import com.brulesoft.alquifor.api.MethodPublicaciones;
+import com.brulesoft.alquifor.api.MethodUsuarios;
+import com.brulesoft.alquifor.api.RetrofitClient;
+import com.brulesoft.alquifor.data.LoginDataSource;
 import com.brulesoft.alquifor.data.LoginRepository;
 import com.brulesoft.alquifor.data.Result;
 import com.brulesoft.alquifor.data.model.LoggedInUser;
 import com.brulesoft.alquifor.R;
+import com.brulesoft.alquifor.models.Publicacion;
+import com.brulesoft.alquifor.models.Usuario;
+
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
