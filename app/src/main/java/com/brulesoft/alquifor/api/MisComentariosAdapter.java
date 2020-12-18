@@ -6,6 +6,7 @@ package com.brulesoft.alquifor.api;
         import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class MisComentariosAdapter extends RecyclerView.Adapter<MisComentariosAd
     private Context context;
     private List<Comentario> dataList;
     private Comentario comentario;
+    SharedPreferences preferences;
 
     public MisComentariosAdapter(List<Comentario> dataList, Context context){
         this.context = context;
@@ -87,9 +89,12 @@ public class MisComentariosAdapter extends RecyclerView.Adapter<MisComentariosAd
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        preferences = context.getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+                        String token  = preferences.getString("TOKEN",null);
+
                         Intent intent = new Intent(v.getContext(), MisComentariosActivity.class);
                         MethodComentarios service = RetrofitClient.getRetrofitInstance().create(MethodComentarios.class);
-                        Call<Comentario> call = service.deleteComentario(dataList.get(position).getId());
+                        Call<Comentario> call = service.deleteComentario("Bearer "+token, dataList.get(position).getId());
 
                         call.enqueue(new Callback<Comentario>() {
 

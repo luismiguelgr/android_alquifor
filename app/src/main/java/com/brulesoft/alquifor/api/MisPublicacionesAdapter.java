@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class MisPublicacionesAdapter extends RecyclerView.Adapter<MisPublicacion
     private Context context;
     private List<Publicacion> dataList;
     private Publicacion publicacion;
+    private SharedPreferences preferences;
 
     public MisPublicacionesAdapter(List<Publicacion> dataList, Context context){
         this.context = context;
@@ -93,9 +95,12 @@ public class MisPublicacionesAdapter extends RecyclerView.Adapter<MisPublicacion
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        preferences = context.getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+                        String token  = preferences.getString("TOKEN",null);
+
                         Intent intent = new Intent(v.getContext(), MisPublicacionesActivity.class);
                         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
-                        Call<Publicacion> call = service.deletePublicacion(dataList.get(position).getId());
+                        Call<Publicacion> call = service.deletePublicacion("Bearer "+token, dataList.get(position).getId());
 
                         call.enqueue(new Callback<Publicacion>() {
 

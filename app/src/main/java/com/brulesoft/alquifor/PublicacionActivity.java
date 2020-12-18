@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -40,6 +44,8 @@ public class PublicacionActivity extends AppCompatActivity {
     private MyAdapterComentario myAdapter;
     private RecyclerView.LayoutManager lManager;
     TextView estiloTextoPros;
+    String token = "";
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,29 @@ public class PublicacionActivity extends AppCompatActivity {
         prosPublicacion = (ListView) findViewById(R.id.prosPublicacion);
         contrasPublicacion = (ListView) findViewById(R.id.contrasPublicacion);
         imagenPublicacionSeleccionada = (ImageView) findViewById(R.id.imagenPublicacionSeleccionada);
+        imagenPublicacionSeleccionada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int width = metrics.widthPixels;
+                int height = metrics.heightPixels;
+                imagenPublicacionSeleccionada.getLayoutParams().width = width;
+                imagenPublicacionSeleccionada.getLayoutParams().height = height;
+                imagenPublicacionSeleccionada.setAdjustViewBounds(true);
+                */
+                 
+            }
+        });
+
+
         Integer id = getIntent().getIntExtra("id", 0);
+
+        preferences = getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+        if(preferences.contains("TOKEN")){
+            token  = preferences.getString("TOKEN",null);
+        }
 
         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
         Call<Publicacion> call = service.getPublicacion(id);
@@ -103,7 +131,11 @@ public class PublicacionActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menuopciones, menu);
+        if(token.isEmpty()){
+            getMenuInflater().inflate(R.menu.menuopcione_sin_registro, menu);
+        }else{
+            getMenuInflater().inflate(R.menu.menuopciones, menu);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
@@ -143,6 +175,16 @@ public class PublicacionActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcionMenuDesconectarse) {
+            preferences = getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+            SharedPreferences.Editor borrarToken = preferences.edit();
+            borrarToken.clear();
+            borrarToken.commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Desconectado", Toast.LENGTH_LONG).show();
             return true;
         }
 

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,7 +46,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import okhttp3.MediaType;
@@ -53,6 +57,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Part;
 
 public class NuevaPublicacionActivity extends AppCompatActivity {
@@ -65,12 +70,19 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
     final int FOTO_CONST = 1;
     String nombreImagen = "";
     File foto = null;
+    private SharedPreferences preferences;
+    String token ="";
+    String id_usuario;
 //    ArrayList<String> listaPros, listaContras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_publicacion);
+
+        preferences = NuevaPublicacionActivity.this.getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+        token  = preferences.getString("TOKEN",null);
+        id_usuario  = preferences.getString("ID_USUARIO","1");
 
         botonCrearNuevaPublicacion = (Button) findViewById(R.id.botonCrearNuevaPublicacion);
         tituloAnadirNuevaPublicacion = (EditText) findViewById(R.id.tituloAnadirNuevaPublicacion);
@@ -95,7 +107,7 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         nuevaPublicacion.addPro(input.getText().toString().trim());
 //                        listaPros.add(input.getText().toString().trim());
-                        listaProsNuevaPublicacion.setText(input.getText().toString().trim());
+                        listaProsNuevaPublicacion.setText(listaProsNuevaPublicacion.getText().toString()+" - "+input.getText().toString().trim());
                     }
                 });
                 builder.show();
@@ -114,7 +126,7 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         nuevaPublicacion.addContra(input.getText().toString().trim());
 //                        listaContras.add(input.getText().toString().trim());
-                        listaContraNuevaPublicacion.setText(input.getText().toString().trim());
+                        listaContraNuevaPublicacion.setText(listaContraNuevaPublicacion.getText().toString()+" - "+input.getText().toString().trim());
                     }
                 });
                 builder.show();
@@ -137,7 +149,7 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
             botonCrearNuevaPublicacion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Call<Publicacion> call = null;
+
 //                    if(nombreImagen != null && nombreImagen.isEmpty()){
 //                                        nuevaPublicacion.setTitulo(tituloAnadirNuevaPublicacion.getText().toString().trim());
 //                                        nuevaPublicacion.setDescripcion(descripcionAnadirNuevaPublicacion.getText().toString().trim());
@@ -152,13 +164,15 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
                         RequestBody nombreFoto = RequestBody.create(MultipartBody.FORM, nombreImagen);
                         RequestBody pros = RequestBody.create(MultipartBody.FORM, nuevaPublicacion.getPros().toString());
                         RequestBody contras = RequestBody.create(MultipartBody.FORM, nuevaPublicacion.getContras().toString());
-                        RequestBody idUsuario = RequestBody.create(MultipartBody.FORM, "1");
+                        RequestBody idUsuario = RequestBody.create(MultipartBody.FORM, id_usuario);
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Authorization", "Bearer "+token);
                         RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), foto);
 
 
                         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
                         MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imagen", nombreImagen, imageBody);
-                        call = service.addPublicacionConImagen(imagePart, titulo, descripcion, idUsuario, nombreFoto, pros, contras);
+                    Call<Publicacion> call = service.addPublicacionConImagen(headers, imagePart, titulo, descripcion, idUsuario, nombreFoto, pros, contras);
 //                    }
 
                     call.enqueue(new Callback<Publicacion>() {
@@ -233,11 +247,22 @@ public class NuevaPublicacionActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.opcionMenuDesconectarse) {
+            preferences = getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+            SharedPreferences.Editor borrarToken = preferences.edit();
+            borrarToken.clear();
+            borrarToken.commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Desconectado", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     private void sacarFoto(String nombreExtension){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+       Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager()) != null){
 
 

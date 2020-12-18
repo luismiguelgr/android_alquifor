@@ -29,6 +29,7 @@ public class MisPublicacionesActivity extends AppCompatActivity {
     private RecyclerView myRecyclerView;
     private MisPublicacionesAdapter myAdapter;
     private RecyclerView.LayoutManager lManager;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MisPublicacionesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences preferences = MisPublicacionesActivity.this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        preferences = MisPublicacionesActivity.this.getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
         String token  = preferences.getString("TOKEN",null);
 
         MethodPublicaciones service = RetrofitClient.getRetrofitInstance().create(MethodPublicaciones.class);
@@ -103,6 +104,15 @@ public class MisPublicacionesActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcionMenuDesconectarse) {
+            SharedPreferences.Editor borrarToken = preferences.edit();
+            borrarToken.clear();
+            borrarToken.commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Desconectado", Toast.LENGTH_LONG).show();
             return true;
         }
 

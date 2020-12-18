@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -18,6 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -42,16 +44,18 @@ public interface MethodPublicaciones {
     @POST("/api/anadir-publicacion")
     Call<Publicacion> addPublicacion(@Body Publicacion publicacion);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @DELETE("/api/publicacion/{id}")
-    Call<Publicacion> deletePublicacion(@Path("id") int id);
+    Call<Publicacion> deletePublicacion(@Header("Authorization") String token, @Path("id") int id);
 
     @Multipart
     @POST("/api/anadir-publicacion")
-    Call<Publicacion> addPublicacionConImagen(@Part MultipartBody.Part imagen,
-                                     @Part("titulo") RequestBody titulo,
-                                     @Part("descripcion") RequestBody descripcion,
-                                     @Part("id_usuario") RequestBody id_usuario,
-                                     @Part("foto") RequestBody foto,
-                                     @Part("pros") RequestBody pros,
-                                     @Part("contras") RequestBody contras);
+    Call<Publicacion> addPublicacionConImagen(@HeaderMap Map<String, String> token,
+                                              @Part MultipartBody.Part imagen,
+                                             @Part("titulo") RequestBody titulo,
+                                             @Part("descripcion") RequestBody descripcion,
+                                             @Part("id_usuario") RequestBody id_usuario,
+                                             @Part("foto") RequestBody foto,
+                                             @Part("pros") RequestBody pros,
+                                             @Part("contras") RequestBody contras);
 }

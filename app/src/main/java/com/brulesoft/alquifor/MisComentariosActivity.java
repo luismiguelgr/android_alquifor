@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.brulesoft.alquifor.api.MethodComentarios;
@@ -30,6 +33,7 @@ public class MisComentariosActivity extends AppCompatActivity {
     private RecyclerView myRecyclerView;
     private MisComentariosAdapter myAdapter;
     private RecyclerView.LayoutManager lManager;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,11 @@ public class MisComentariosActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        preferences = MisComentariosActivity.this.getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+        String token  = preferences.getString("TOKEN",null);
+
         MethodComentarios service = RetrofitClient.getRetrofitInstance().create(MethodComentarios.class);
-        Call<List<Comentario>> call = service.getComentariosUsuario(2);
+        Call<List<Comentario>> call = service.getComentariosUsuario("Bearer "+token,2);
         call.enqueue(new Callback<List<Comentario>>() {
 
             @Override
@@ -103,6 +110,17 @@ public class MisComentariosActivity extends AppCompatActivity {
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show();
             return true;
         }
+        if (id == R.id.opcionMenuDesconectarse) {
+            preferences = getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
+            SharedPreferences.Editor borrarToken = preferences.edit();
+            borrarToken.clear();
+            borrarToken.commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Desconectado", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

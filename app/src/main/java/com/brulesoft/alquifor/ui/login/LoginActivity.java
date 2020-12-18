@@ -39,6 +39,7 @@ import com.brulesoft.alquifor.data.LoginDataSource;
 import com.brulesoft.alquifor.models.Comentario;
 import com.brulesoft.alquifor.models.LoginCredenciales;
 import com.brulesoft.alquifor.models.RespuestaLogin;
+import com.brulesoft.alquifor.models.Usuario;
 import com.brulesoft.alquifor.ui.login.LoginViewModel;
 import com.brulesoft.alquifor.ui.login.LoginViewModelFactory;
 
@@ -151,15 +152,17 @@ public class LoginActivity extends AppCompatActivity {
                                 loadingProgressBar.setVisibility(View.VISIBLE);
 //                                String token = response.body().string();
                                 String token = response.body().getToken();
-                                SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                                SharedPreferences preferences = getSharedPreferences("ALQUIFOR", Context.MODE_PRIVATE);
                                 preferences.edit().putString("TOKEN", token).apply();
+                                String email = usernameEditText.getText().toString().trim();
+                                preferences.edit().putString("EMAIL", email).apply();
 
-                                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                                startActivity(intent);
                             } catch (Exception e) {
                                 Toast.makeText(LoginActivity.this, "No se ha podido iniciar sesión", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
+                            Intent intent = new Intent(v.getContext(), MainActivity.class);
+                            startActivity(intent);
                         }else{
                             Toast.makeText(LoginActivity.this, "Usuario incorrecto", Toast.LENGTH_SHORT).show();
                         }
